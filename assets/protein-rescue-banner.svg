@@ -1,21 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
   <title id="title">Protein Rescue Lab</title><desc id="desc">An abstract protein chain and a highlighted compensatory mutation.</desc>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0c162f"/><stop offset="1" stop-color="#183c50"/></linearGradient>
-    <linearGradient id="line" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#71e1c3"/><stop offset="1" stop-color="#6aa8ff"/></linearGradient>
-    <radialGradient id="glow"><stop stop-color="#60dfc1" stop-opacity=".22"/><stop offset="1" stop-color="#60dfc1" stop-opacity="0"/></radialGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#14244a"/><stop offset="1" stop-color="#263e7a"/></linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffba82"/><stop offset="1" stop-color="#6aa8ff"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#87aaff" stop-opacity=".22"/><stop offset="1" stop-color="#87aaff" stop-opacity="0"/></radialGradient>
   </defs>
   <rect width="1200" height="360" rx="24" fill="url(#bg)"/>
   <circle cx="930" cy="180" r="215" fill="url(#glow)"/>
   <g fill="none" stroke="#7ac2cf" stroke-opacity=".09"><path d="M690 0v360M750 0v360M810 0v360M870 0v360M930 0v360M990 0v360M1050 0v360M1110 0v360"/><path d="M660 60h540M660 120h540M660 180h540M660 240h540M660 300h540"/></g>
-  <text x="72" y="87" fill="#8de2cb" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="15" font-weight="700" letter-spacing="3">RESEARCH PROTOTYPE  /  AI + BIOLOGY</text>
+  <text x="72" y="87" fill="#b7ccff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="15" font-weight="700" letter-spacing="3">RESEARCH PROTOTYPE  /  AI + BIOLOGY</text>
   <text x="72" y="164" fill="#f5fafb" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="52" font-weight="700" letter-spacing="-1">Protein Rescue Lab</text>
   <text x="74" y="207" fill="#b9ccd6" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="20">Explore compensatory mutations, one query at a time.</text>
-  <rect x="72" y="252" width="270" height="36" rx="18" fill="#7ee2c4" fill-opacity=".12" stroke="#7ee2c4" stroke-opacity=".35"/>
-  <text x="92" y="275" fill="#a9ead7" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="600" letter-spacing=".8">AGENT × SCIENTIFIC TOOLBOX</text>
+  <rect x="72" y="252" width="270" height="36" rx="18" fill="#a9c2ff" fill-opacity=".12" stroke="#a9c2ff" stroke-opacity=".35"/>
+  <text x="92" y="275" fill="#d9e4ff" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" font-size="13" font-weight="600" letter-spacing=".8">AGENT × SCIENTIFIC TOOLBOX</text>
   <path d="M745 243 C790 268 797 180 847 197 S902 278 943 221 S968 116 1012 126 S1055 204 1105 168" fill="none" stroke="url(#line)" stroke-width="5" stroke-linecap="round"/>
   <path d="M751 123 C795 104 810 164 850 148 S902 84 945 119 S967 209 1014 204 S1067 120 1100 115" fill="none" stroke="#a8c7fa" stroke-opacity=".45" stroke-width="3" stroke-linecap="round" stroke-dasharray="7 9"/>
-  <g fill="#a1ebd3" stroke="#173b4a" stroke-width="5"><circle cx="745" cy="243" r="9"/><circle cx="847" cy="197" r="10"/><circle cx="943" cy="221" r="10"/><circle cx="1012" cy="126" r="11"/><circle cx="1105" cy="168" r="9"/></g>
-  <circle cx="943" cy="221" r="27" fill="none" stroke="#8ee9cc" stroke-opacity=".3" stroke-width="2"/><circle cx="1012" cy="126" r="25" fill="none" stroke="#a1c3ff" stroke-opacity=".3" stroke-width="2"/>
-  <path d="M953 202L1001 145" stroke="#a9efd6" stroke-opacity=".65" stroke-width="1.5" stroke-dasharray="4 5"/>
+  <g fill="#d2dfff" stroke="#243a70" stroke-width="5"><circle cx="745" cy="243" r="9"/><circle cx="847" cy="197" r="10"/><circle cx="943" cy="221" r="10"/><circle cx="1012" cy="126" r="11"/><circle cx="1105" cy="168" r="9"/></g>
+  <circle cx="943" cy="221" r="27" fill="none" stroke="#a9c2ff" stroke-opacity=".3" stroke-width="2"/><circle cx="1012" cy="126" r="25" fill="none" stroke="#a1c3ff" stroke-opacity=".3" stroke-width="2"/>
+  <path d="M953 202L1001 145" stroke="#ffd5ac" stroke-opacity=".65" stroke-width="1.5" stroke-dasharray="4 5"/>
 </svg>
