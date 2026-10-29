@@ -1,0 +1,8 @@
+{
+  "name": "@protein-rescue/pdz-tools",
+  "version": "1.0.1",
+  "type": "module",
+  "license": "MIT",
+  "exports": "./index.mjs",
+  "agnes": {"plugins": [{"export": "pdzTools", "id": "ext:protein-rescue/pdz-tools", "inject": ["extension"]}]}
+}

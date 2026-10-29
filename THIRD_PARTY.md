@@ -1,0 +1,6 @@
+# Third-party sources / 第三方来源
+
+- **Agnes Harness**: <https://github.com/AgnesAI-Labs/agnes-harness>, Apache License 2.0. The original local integration used commit `cde816b88c737b9fd04e7ef55b899e7b4cd55eb7`; its source and dependencies are not bundled here. Consult the upstream license and notices when installing or redistributing it. 原项目所用 AGH 源码和依赖未打包；安装或再分发时遵守上游许可证和声明。
+- **AAindex**, record FAUJ880103, normalized van der Waals volume (Fauchère et al., 1988): <https://www.genome.jp/ftp/db/community/aaindex/aaindex1>. `data/public_reference/residue_volumes.json` contains the 20 numerical values extracted from that record. The MIT license does not assert rights over the upstream database. 该文件包含由条目提取的 20 个数值；MIT 许可证不宣称涵盖上游数据库的权利。
+- **ProteinGym**: <https://github.com/OATML-Markslab/ProteinGym>; GB1 assay: Olson et al., 2014, <https://doi.org/10.1016/j.cub.2014.09.072>. Assay archives are not included. Consult upstream dataset terms before downloading or redistributing. 测定数据未打包，下载或再分发前请查阅上游条款。
+- Other historical PDZ, PDB, and pretrained-model inputs are not bundled; consult the source references in the corresponding scripts and obtain them separately under their own terms. 其他历史 PDZ、PDB 和预训练模型输入未打包，请参照相关脚本注明的来源及各自条款。

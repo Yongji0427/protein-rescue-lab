@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+.local/
+vendor/
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+data/source_archives/
+data/evaluator_only/
+experiments/

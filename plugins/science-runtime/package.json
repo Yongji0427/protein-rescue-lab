@@ -1,0 +1,8 @@
+{
+  "name": "@protein-rescue/science-runtime",
+  "version": "1.0.0",
+  "type": "module",
+  "license": "MIT",
+  "exports": "./index.mjs",
+  "agnes": {"plugins": [{"export": "scienceRuntime", "id": "ext:protein-rescue/science-runtime", "inject": ["extension"]}]}
+}

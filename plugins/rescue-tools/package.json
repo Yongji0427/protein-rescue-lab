@@ -1,0 +1,8 @@
+{
+  "name": "@protein-rescue/query-tools",
+  "version": "1.0.1",
+  "type": "module",
+  "license": "MIT",
+  "exports": "./index.mjs",
+  "agnes": {"plugins": [{"export": "rescueTools", "id": "ext:protein-rescue/query-tools", "inject": ["extension"]}]}
+}

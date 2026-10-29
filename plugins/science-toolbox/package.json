@@ -1,0 +1,8 @@
+{
+  "name": "@protein-rescue/science-toolbox",
+  "version": "1.1.0",
+  "type": "module",
+  "license": "MIT",
+  "exports": "./index.mjs",
+  "agnes": {"plugins": [{"export": "scienceToolbox", "id": "ext:protein-rescue/science-toolbox", "inject": ["extension"]}]}
+}
