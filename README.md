@@ -1,18 +1,39 @@
-# Protein Rescue Lab
+<div align="center">
 
-English | [简体中文](README.zh-CN.md)
+<img src="assets/protein-rescue-banner.svg" alt="Protein Rescue Lab — AI and biology research prototype" width="100%">
 
-Protein Rescue Lab is a research prototype for exploring **compensatory protein mutations**: given a damaging mutation, can another substitution restore a measured molecular property? It combines an agent-accessible scientific toolbox with a separate evaluator that reveals historical measurements under a fixed query budget. The project uses retrospective assay data; it does not run wet-lab experiments.
+**Can a second mutation help rescue a damaged protein?**<br>
+An agent-accessible research toolbox for exploring that question with historical measurements.
 
-## Project overview
+[![License: MIT](https://img.shields.io/badge/License-MIT-69cbb1?style=flat-square)](LICENSE)
+![Status: research prototype](https://img.shields.io/badge/Status-research%20prototype-5477a4?style=flat-square)
+![Python: 3.13](https://img.shields.io/badge/Python-3.13-597aa2?style=flat-square)
 
-The toolbox lets an agent inspect candidate mutations, sequence features and reference structure, build simple predictions from already observed measurements, record hypotheses, request batches of historical measurements, and submit a conclusion with evidence. An evaluator enforces legal mutations, budgets, and persistent task state. Its main design feature is the separation of agent-visible information from evaluator-owned measurements, with predictions and rationales recorded before feedback.
+**English** · [简体中文](README.zh-CN.md)
 
-This is an exploratory engineering and research system, not a validated protein-design service. Synthetic tasks demonstrate tool execution only. Structural proximity and non-additivity are not proof of a rescue mechanism. Historical GB1 and PDZ analyses have different protocols and limitations; this code release does not contain their full datasets or result archives, and it does not establish a general improvement in rescue discovery.
+[Watch the demo](https://www.bilibili.com/video/BV1iMpm6QEUz/) · [How it works](#architecture) · [Get started](#getting-started) · [Integration](#integration)
+
+</div>
+
+---
+
+## The idea
+
+Protein mutations can damage a measured property, but a second substitution may compensate for that damage. Protein Rescue Lab explores this problem by combining an Agnes agent with a scientific toolbox and a separate evaluator. The agent investigates candidate mutations; the evaluator reveals historical measurements under a fixed query budget.
+
+| Explore | Reason | Evaluate |
+|:--|:--|:--|
+| Inspect candidate mutations, sequence features and reference structure. | Build simple predictions from observed measurements and record hypotheses. | Commit candidates before feedback, compare controls and submit an evidence-backed conclusion. |
+
+**What makes the prototype distinctive:** agent-visible information is separated from evaluator-owned measurements; predictions and rationales are recorded before feedback; and task state and budgets persist across requests.
+
+> **Research boundary** · This is an exploratory prototype, not a validated protein-design service. It replays historical assay data and does not conduct wet-lab experiments. Synthetic tasks demonstrate tool execution only. Structural proximity and non-additivity do not establish a rescue mechanism. GB1 and PDZ analyses have different protocols and limitations; no general improvement in rescue discovery is claimed.
 
 ## Demo video
 
-[Watch the project demonstration on Bilibili](https://www.bilibili.com/video/BV1iMpm6QEUz/). The video reflects the state at the time of recording; features and setup may differ from this release.
+▶ **[Watch the Protein Rescue Lab demonstration on Bilibili](https://www.bilibili.com/video/BV1iMpm6QEUz/)**
+
+The video shows the project as recorded. Features and setup may differ from this release.
 
 ## Architecture
 
@@ -21,23 +42,27 @@ flowchart LR
     A[Agnes agent / AGH] -->|registered tools| B[Science toolbox plugin]
     B -->|local JSON requests| C[Evaluator service]
     C --> D[Public candidates and reference features]
-    C --> E[Private historical measurements]
+    C --> E[Evaluator-owned historical measurements]
     C --> F[Persistent state, budget and decisions]
     C -->|observations and status| B
-    C --> G[Isolated Python analysis on macOS]
+    C --> G[Restricted Python analysis on macOS]
 ```
 
-- `plugins/science-toolbox/`: AGH tool registration and session hooks.
-- `scripts/science_toolbox.py` and `scripts/prepare_science_toolbox.py`: task state, synthetic task, local evaluator and science operations.
-- `scripts/toolbox_python.py`: restricted analysis subprocess using macOS Seatbelt; execution is refused when the sandbox is unavailable.
-- `scripts/`: GB1 and PDZ retrospective experiment, audit and reporting scripts; `plugins/` also contains earlier experiment integrations.
-- `data/public_reference/residue_volumes.json`: AAindex-derived feature values used by the synthetic task; see [third-party sources](THIRD_PARTY.md).
+| Component | Responsibility |
+|:--|:--|
+| [`plugins/science-toolbox/`](plugins/science-toolbox/) | Registers AGH tools and session hooks. |
+| [`scripts/science_toolbox.py`](scripts/science_toolbox.py) | Maintains task state, validates operations and serves the evaluator. |
+| [`scripts/prepare_science_toolbox.py`](scripts/prepare_science_toolbox.py) | Prepares the synthetic task and local evaluator. |
+| [`scripts/toolbox_python.py`](scripts/toolbox_python.py) | Runs restricted analysis through macOS Seatbelt; refuses execution when the sandbox is unavailable. |
+| [`scripts/`](scripts/) and [`plugins/`](plugins/) | Include GB1/PDZ retrospective experiment scripts and earlier integrations. |
 
-The evaluator process can access its input labels; this separation is a design boundary and must not be mistaken for a complete OS-level isolation guarantee for every agent or experiment.
+The evaluator process can access its input labels. The design separation is not a guarantee of complete OS-level isolation for every agent or experiment.
 
-## Environment and local checks
+## Getting started
 
-The original environment used Python 3.13 and the pinned Python packages in `requirements.txt`. The Python sandbox checks require macOS and `/usr/bin/sandbox-exec`; Node.js is needed for AGH integration. To run the offline synthetic checks from the repository root:
+### Run the offline synthetic checks
+
+The original environment used **Python 3.13** and the pinned packages in `requirements.txt`. The sandbox checks require **macOS** and `/usr/bin/sandbox-exec`. From the repository root:
 
 ```bash
 python3 -m venv .venv
@@ -46,14 +71,22 @@ python -m pip install -r requirements.txt
 python scripts/test_science_toolbox.py
 ```
 
-These checks use synthetic labels and do not call a model. They do not verify a full agent deployment. The original AGH integration was configured for a specific local daemon and SDK checkout; several scripts retain historical `/tmp` runtime paths and are not portable turnkey setup instructions. Full agent execution requires independently installing and configuring [Agnes Harness](https://github.com/AgnesAI-Labs/agnes-harness), a model provider, and adapting those local paths. Never commit credentials or local task state. The old datasets, run logs, generated reports, and bundled AGH checkout are not included in this release.
+These tests use synthetic labels and do not call a model. They check toolbox behavior; they do **not** verify a full agent deployment. The restricted analysis worker resolves the base Python executable, so its available packages also depend on that base environment.
 
-## Integration standards
+### Full agent integration
 
-The AGH plugin exposes typed tools including `science_state`, `science_candidates`, `science_sequence`, `science_structure`, `science_predict`, `science_python`, `science_record`, `science_query`, `science_controls`, and `science_finish`. Tool schemas are defined in [the plugin](plugins/science-toolbox/index.mjs). The plugin communicates with the local evaluator using HTTP POST and JSON; the evaluator validates a task token, session key, request identity, arguments and budget before returning JSON. See [the evaluator](scripts/science_toolbox.py) for the implemented contract and error handling. This is a project-specific interface, not a claim of MCP or another external protocol standard.
+The original AGH integration was configured for a specific local daemon and SDK checkout. Several scripts retain historical `/tmp` runtime paths and are **not portable turnkey setup instructions**. Full agent execution requires independently installing and configuring [Agnes Harness](https://github.com/AgnesAI-Labs/agnes-harness), a model provider, and adapting local paths. Node.js is required for the AGH integration. Never commit credentials or local task state.
 
-A query submits one to four unique legal candidates with predictions and a rationale before feedback; repeat handling and the current limits are implemented by the evaluator. These limits apply to the toolbox version in this repository and should not be assumed for earlier experiment plugins. Set `PROTEIN_RESCUE_ROOT` to the checkout root when launching AGH from another working directory. Model credentials and endpoints must be configured privately; no key is supplied.
+This release does not include the old datasets, run logs, generated reports or bundled AGH checkout.
 
-## Sources and license
+## Integration
 
-Original project code is released under the [MIT License](LICENSE). External software, datasets and reference materials remain under their own terms; sources and release limitations are listed in [THIRD_PARTY.md](THIRD_PARTY.md).
+The AGH plugin exposes typed tools for task state, candidate and structure inspection, prediction, Python analysis, hypothesis recording, measurement queries, controls and conclusions. Their schemas are defined in [the plugin](plugins/science-toolbox/index.mjs).
+
+The plugin communicates with the local evaluator using **HTTP POST and JSON**. The evaluator validates the task token, session key, request identity, arguments and budget before returning JSON; see [the evaluator implementation](scripts/science_toolbox.py) for the contract and errors. This is a project-specific interface, not a claim of MCP or another external protocol standard.
+
+A query submits **1–4 unique legal candidates**, predictions and a rationale before feedback. Repeated requests and current limits are handled by the evaluator; these limits apply to this toolbox version and should not be assumed for earlier experiment plugins. Set `PROTEIN_RESCUE_ROOT` to the checkout root when launching AGH from another working directory. Configure model credentials and endpoints privately; no key is supplied.
+
+## Sources & license
+
+Original project code is released under the [MIT License](LICENSE). External software, datasets and reference materials remain under their own terms. See [third-party sources and release limitations](THIRD_PARTY.md), including the AAindex-derived values used by the synthetic task.
