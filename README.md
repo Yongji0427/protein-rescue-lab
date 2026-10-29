@@ -37,16 +37,9 @@ The video shows the project as recorded. Features and setup may differ from this
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    A[Agnes agent / AGH] -->|registered tools| B[Science toolbox plugin]
-    B -->|local JSON requests| C[Evaluator service]
-    C --> D[Public candidates and reference features]
-    C --> E[Evaluator-owned historical measurements]
-    C --> F[Persistent state, budget and decisions]
-    C -->|observations and status| B
-    C --> G[Restricted Python analysis on macOS]
-```
+![Architecture overview](assets/architecture-en.svg)
+
+[Open the interactive HTML architecture page](architecture.html) (download the repository and open the file in a browser; GitHub displays HTML source).
 
 | Component | Responsibility |
 |:--|:--|

@@ -37,16 +37,9 @@
 
 ## 技术架构
 
-```mermaid
-flowchart LR
-    A[Agnes 智能体 / AGH] -->|注册工具| B[科学工具箱插件]
-    B -->|本地 JSON 请求| C[评测服务]
-    C --> D[公开候选及参考特征]
-    C --> E[评测器持有的历史测量]
-    C --> F[持久状态、预算和决策]
-    C -->|观察与状态| B
-    C --> G[macOS 受限 Python 分析]
-```
+![项目架构概览](assets/architecture-zh.svg)
+
+[查看可切换语言的 HTML 架构展示](architecture.html)（下载仓库后用浏览器打开；GitHub 页面显示 HTML 源码）。
 
 | 组件 | 职责 |
 |:--|:--|
