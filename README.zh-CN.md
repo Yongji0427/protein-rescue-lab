@@ -37,9 +37,11 @@
 
 ## 技术架构
 
+![科研流程](assets/flow-zh.svg)
+
 ![项目架构概览](assets/architecture-zh.svg)
 
-[查看可切换语言的 HTML 架构展示](architecture.html)（下载仓库后用浏览器打开；GitHub 页面显示 HTML 源码）。
+[查看可切换语言的 HTML 架构展示](architecture.html#zh)（下载仓库后用浏览器打开；GitHub 页面显示 HTML 源码）。
 
 | 组件 | 职责 |
 |:--|:--|

@@ -37,6 +37,8 @@ The video shows the project as recorded. Features and setup may differ from this
 
 ## Architecture
 
+![Research workflow](assets/flow-en.svg)
+
 ![Architecture overview](assets/architecture-en.svg)
 
 [Open the interactive HTML architecture page](architecture.html) (download the repository and open the file in a browser; GitHub displays HTML source).
